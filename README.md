@@ -1,4 +1,4 @@
-# PyEnGNet 1.0
+# pyEnGNet: optimized reconstruction of gene co-expression networks using multi-GPU
 
 # Introducción
 Las principales aplicaciones de esta nueva herramienta desarrollada en la Universidad Pablo de Olavide se centran en el campo de la Bioinformática y la Biomedicina. Así, por ejemplo con EnGNet 1.0 es posible llevar a cabo análisis biomédicos de diferentes procesos biológicos tales como análisis de biomarcadores, interacciones gen-gene entre otros. Actualmente la utilidad del software ha sido testada en el análisis del síndrome de estrés postraumático.
