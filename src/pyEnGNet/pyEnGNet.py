@@ -8,6 +8,7 @@ import networkx as nx
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor
 import math
+import os
 
 sameval = 0.7
 
@@ -234,7 +235,7 @@ class PyEnGNet:
 
         return edges
 
-    def engnet_1_0(self):
+    def engnet(self):
         oedges = self.mainmethod()
         G = nx.Graph()
         G.add_edges_from(oedges)
@@ -291,14 +292,15 @@ class PyEnGNet:
         s += f"\n\tNMI threshold selected: {self.nmi_threshold}"
         s += f"\n\n\tWeight Threshold selected for edge readition: {self.readded_edges_threshold}"
         s += f"\nUsing {self.ncores} of your cores to process results"
-
         return s
 
-
 if __name__ == "__main__":
-    df = pd.read_csv("/home/daiego/PycharmProjects/pyEnGNet/pyEnGNet/Notebooks/Data/113_exp_mat_cond_1.csv")
+    currentDir = os.getcwd()+"/src/pyEnGNet/datasets/"
+    df = pd.read_csv(currentDir+"113_exp_mat_cond_1.csv")
     df = df.drop(df.columns[[0, 2]], axis=1)
     data = df.to_numpy()
     peg = PyEnGNet(nparr=data)
     print(peg)
-    G, aristas = peg.engnet_1_0()
+    G, aristas = peg.engnet()
+    nx.draw_kamada_kawai(G)
+
