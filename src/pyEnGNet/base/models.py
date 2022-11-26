@@ -19,9 +19,6 @@ class Dataset:
     nmi_threshold : float
         NMI threshold
     
-    pearson_threshold : Array
-        Pearson threshold
-    
     readded_edges_threshold : float
         If hubs exist in a network, edges whose weight exceeds the threshold indicated by this parameter shall be added.
     
@@ -29,7 +26,7 @@ class Dataset:
         Number of cores used        
     """
     
-    def __init__(self, data=None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, pearson_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+    def __init__(self, data=None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
        
         self._data = data
         
@@ -43,7 +40,6 @@ class Dataset:
         self._spearman_threshold = spearman_th
         self._kendall_threshold = kendall_th
         self._nmi_threshold = nmi_th
-        self._pearson_threshold = pearson_th
 
         self._readded_edges_threshold = readded_th
         self._ncores = cores
@@ -95,15 +91,7 @@ class Dataset:
     @nmi_threshold.setter
     def nmi_threshold(self, nmi_threshold):
         self._nmi_threshold = nmi_threshold
-    
-    @property
-    def pearson_threshold(self):
-        return self._pearson_threshold
-    
-    @pearson_threshold.setter
-    def pearson_threshold(self, pearson_threshold):
-        self._pearson_threshold = pearson_threshold
-    
+      
     @property
     def readded_edges_threshold(self):
         return self._readded_edges_threshold

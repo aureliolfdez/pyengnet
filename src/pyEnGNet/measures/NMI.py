@@ -64,6 +64,7 @@ class NMI:
         maxVal = Normalization.normalizedArray(gen1, gen1Normalized, len(gen1))
         Normalization.normalizedArray(gen2, gen2Normalized, len(gen2))
         try:
+            print("\naqui esta: ")
             value = 2.0 * NMI.__calculateMutualInformation(gen1Normalized, gen2Normalized, size, maxVal) / (
                     NMI.__calculateEntropy(gen1, gen1Normalized, size) + NMI.__calculateEntropy(gen2, gen2Normalized,
                                                                                               size))

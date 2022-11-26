@@ -10,7 +10,7 @@ import networkx as nx
 import multiprocessing as mp
 import math
 
-class Algorithm:
+class Engnet:
     
     @staticmethod
     def __intervals(total, partes):
@@ -87,27 +87,28 @@ class Algorithm:
             major_voting += test[0]
 
         if major_voting >= 2:
+            print(i,",",j,"::: ",tests)
             accepted_values.append(
-                [i, j, {'weight': Algorithm.__calculate_weight(tests)}])
+                [i, j, {'weight': Engnet.__calculate_weight(tests)}])
     
     @staticmethod
     def edge_corr_validation(dataset, start, end):
         accepted = []        
         for i in tqdm(range(start, end)):
             for j in range(i + 1, dataset.row_size):
-                Algorithm.__validate_corr(dataset, i, j, accepted)
+                Engnet.__validate_corr(dataset, i, j, accepted)
         return accepted
     
     @staticmethod
     def __mainmethod(dataset):
-        intervalos = Algorithm.__intervals(len(dataset.data), dataset.ncores)
+        intervalos = Engnet.__intervals(len(dataset.data), dataset.ncores)
         edges = []
         with ProcessPoolExecutor(max_workers=dataset.ncores) as executor:            
             results = []
             for rango in intervalos:
                 start = rango[0]
                 end = rango[1]
-                results.append(executor.submit(Algorithm.edge_corr_validation, dataset, start, end))
+                results.append(executor.submit(Engnet.edge_corr_validation, dataset, start, end))
                 
         for f in concurrent.futures.as_completed(results):
             for val in f.result():
@@ -116,13 +117,14 @@ class Algorithm:
         return edges
     
     @staticmethod
-    def engnet(dataset):
-        oedges = Algorithm.__mainmethod(dataset)
+    def process(dataset):
+        oedges = Engnet.__mainmethod(dataset)
+        
         G = nx.Graph()
         G.add_edges_from(oedges)
         G2 = nx.maximum_spanning_tree(G, weight='weight', algorithm="kruskal")
 
-        G3 = Algorithm.__readd_edges(dataset, G, G2)
+        G3 = Engnet.__readd_edges(dataset, G, G2)
         fedges = nx.to_edgelist(G3)
 
         return G3, fedges

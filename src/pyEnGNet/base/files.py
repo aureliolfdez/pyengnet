@@ -5,7 +5,7 @@ import numpy as np
 import multiprocessing as mp
 import os
 
-def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, pearson_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
     """
     Load data from a txt or csv file. (Reuse function)
     
@@ -31,5 +31,5 @@ def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, pe
         if fileExtension in extensionsCsv:
             dataset = np.asarray(pd.read_csv(path, sep=separator))
             dataset = np.delete(dataset, 0, 1)
-            dataset = Dataset(dataset, nmi_th, spearman_th, kendall_th, pearson_th, readded_th, cores)        
+            dataset = Dataset(dataset, nmi_th, spearman_th, kendall_th, readded_th, cores)        
     return dataset
