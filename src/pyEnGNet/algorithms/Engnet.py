@@ -83,6 +83,8 @@ class Engnet:
         # Agregamos las respuestas de los tests a una lista que servirá para el calculo de los pesos
         tests = [NMI.process(dataset, v, w), Kendall.process(dataset, v, w), Spearman.process(dataset, v, w)]
         
+        print(tests)
+        
         for test in tests:
             major_voting += test[0]
 
