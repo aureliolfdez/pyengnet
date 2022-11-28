@@ -36,7 +36,6 @@ class NMI:
         LOG_BASE = 2.0
         total = maxValGene1 + maxValGene2 + (maxValGene1 * maxValGene2)
         probMap = [0.0] * (total)
-        # 2 (gen1) + 2 (gen2) + 4 (joint)
         iColumn = 0
         while (iColumn < size):
             valGen1Column = gen1[iColumn]

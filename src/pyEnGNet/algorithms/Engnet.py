@@ -87,6 +87,7 @@ class Engnet:
             major_voting += test[0]
 
         if major_voting >= 2:
+            print(i,",",j,"::: ",tests)
             accepted_values.append(
                 [i, j, {'weight': Engnet.__calculate_weight(tests)}])
     
