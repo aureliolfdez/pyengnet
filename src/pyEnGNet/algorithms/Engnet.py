@@ -6,10 +6,32 @@ import concurrent.futures
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 from tqdm import tqdm
-import networkx as nx
 import multiprocessing as mp
 import math
 
+
+class OutputEngnet:
+    
+    def __init__(self, accepted=None, testsOutput = None):
+       
+        self._accepted = accepted
+        self._testsOutput = testsOutput  
+        
+    @property
+    def accepted(self):
+        return self._accepted
+    
+    @accepted.setter
+    def accepted(self, accepted):
+        self._accepted = accepted
+    
+    @property
+    def testsOutput(self):
+        return self._testsOutput
+    
+    @testsOutput.setter
+    def testsOutput(self, testsOutput):
+        self._testsOutput = testsOutput
 class Engnet:
     
     @staticmethod
@@ -73,7 +95,7 @@ class Engnet:
             return graph2
     
     @staticmethod
-    def __validate_corr(dataset, i, j, accepted_values):
+    def __validate_corr(dataset, i, j, accepted_values, testsOutput_values, saveComplete = False):
         major_voting = 0
 
         # Las dos filas que vamos a utilizar
@@ -87,47 +109,60 @@ class Engnet:
             major_voting += test[0]
 
         if major_voting >= 2:
-            print(i,",",j,"::: ",tests)
+            if saveComplete == True:
+                testsOutput_values.append(str(dataset.gene[i])+","+str(dataset.gene[j])+","+str(tests[0][1])+","+str(tests[1][1])+","+str(tests[2][1]))
+                
             accepted_values.append(
-                [i, j, {'weight': Engnet.__calculate_weight(tests)}])
+                [dataset.gene[i], dataset.gene[j], {'weight': round(Engnet.__calculate_weight(tests),2)}])
+            
     
     @staticmethod
-    def edge_corr_validation(dataset, start, end):
-        accepted = []        
+    def edge_corr_validation(dataset, start, end, saveComplete = False):
+        accepted = []
+        testsOutput = []
+        
         for i in tqdm(range(start, end)):
             for j in range(i + 1, dataset.row_size):
-                Engnet.__validate_corr(dataset, i, j, accepted)
-        return accepted
+                Engnet.__validate_corr(dataset, i, j, accepted, testsOutput, saveComplete)
+        
+        return OutputEngnet(accepted,testsOutput)
     
     @staticmethod
-    def __mainmethod(dataset):
+    def __mainmethod(dataset, saveComplete = False):
         intervalos = Engnet.__intervals(len(dataset.data), dataset.ncores)
         edges = []
+        testsOutput = []
+        
+        if saveComplete == True:
+            testsOutput.append("Source,Destination,NMI,Kendall,Spearman")
+            
         with ProcessPoolExecutor(max_workers=dataset.ncores) as executor:            
             results = []
             for rango in intervalos:
                 start = rango[0]
                 end = rango[1]
-                results.append(executor.submit(Engnet.edge_corr_validation, dataset, start, end))
-                
+                results.append(executor.submit(Engnet.edge_corr_validation, dataset, start, end, saveComplete))
+        
         for f in concurrent.futures.as_completed(results):
-            for val in f.result():
+            for val in f.result().testsOutput:
+                testsOutput.append(val)
+                
+            for val in f.result().accepted:
                 edges.append(val)
 
-        return edges
+        return edges, testsOutput
     
     @staticmethod
-    def process(dataset):
-        oedges = Engnet.__mainmethod(dataset)
+    def process(dataset, saveComplete = False):
         
-        G = nx.Graph()
-        G.add_edges_from(oedges)
-        G2 = nx.maximum_spanning_tree(G, weight='weight', algorithm="kruskal")
+        graphComplete, infoGraphComplete = Engnet.__mainmethod(dataset, saveComplete)
+              
+        #G2 = nx.maximum_spanning_tree(G, weight='weight', algorithm="kruskal")
+        
+        #G3 = Engnet.__readd_edges(dataset, G, G2)
+        #fedges = nx.to_edgelist(G3)
 
-        G3 = Engnet.__readd_edges(dataset, G, G2)
-        fedges = nx.to_edgelist(G3)
-
-        return G3, fedges
+        return graphComplete, infoGraphComplete
 
 
     

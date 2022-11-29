@@ -26,9 +26,10 @@ class Dataset:
         Number of cores used        
     """
     
-    def __init__(self, data=None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+    def __init__(self, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
        
         self._data = data
+        self._gene = gene
         
         if data is not None:
             self._row_size = len(data)
@@ -51,6 +52,14 @@ class Dataset:
     @data.setter
     def data(self, data):
         self._data = data
+    
+    @property
+    def gene(self):
+        return self._gene
+    
+    @gene.setter
+    def gene(self, gene):
+        self._gene = gene
     
     @property
     def row_size(self):
