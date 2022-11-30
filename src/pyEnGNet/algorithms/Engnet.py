@@ -110,7 +110,7 @@ class Engnet:
 
         if major_voting >= 2:
             if saveComplete == True:
-                testsOutput_values.append(str(dataset.gene[i])+","+str(dataset.gene[j])+","+str(tests[0][1])+","+str(tests[1][1])+","+str(tests[2][1]))
+                testsOutput_values.append(str(dataset.gene[i])+"\t"+str(dataset.gene[j])+"\t"+str(tests[0][1])+"\t"+str(tests[1][1])+"\t"+str(tests[2][1]))
                 
             accepted_values.append(
                 [dataset.gene[i], dataset.gene[j], {'weight': round(Engnet.__calculate_weight(tests),2)}])
@@ -134,7 +134,7 @@ class Engnet:
         testsOutput = []
         
         if saveComplete == True:
-            testsOutput.append("Source,Destination,NMI,Kendall,Spearman")
+            testsOutput.append("Source\tDestination\tNMI\tKendall\tSpearman")
             
         with ProcessPoolExecutor(max_workers=dataset.ncores) as executor:            
             results = []
@@ -149,20 +149,32 @@ class Engnet:
                 
             for val in f.result().accepted:
                 edges.append(val)
+        
+        graphComplete = nx.Graph()
+        graphComplete.add_edges_from(edges)
 
-        return edges, testsOutput
+        return graphComplete, testsOutput
     
     @staticmethod
     def process(dataset, saveComplete = False):
         
+        # First step: Ensemble
         graphComplete, infoGraphComplete = Engnet.__mainmethod(dataset, saveComplete)
               
-        #G2 = nx.maximum_spanning_tree(G, weight='weight', algorithm="kruskal")
+        # Second step: Pruning
+        graphFiltered = nx.maximum_spanning_tree(graphComplete, weight='weight', algorithm="kruskal")
+        graphFiltered = Engnet.__readd_edges(dataset, graphComplete, graphFiltered)
+        edgesFiltered = nx.to_edgelist(graphFiltered)
         
-        #G3 = Engnet.__readd_edges(dataset, G, G2)
-        #fedges = nx.to_edgelist(G3)
-
-        return graphComplete, infoGraphComplete
+        # Filtered output
+        infoGraphFiltered = []
+        
+        if saveComplete == True:
+            infoGraphFiltered.append("Gene1\tGene2\tWeight")
+            for edge in edgesFiltered:
+                infoGraphFiltered.append(str(edge[0])+"\t"+str(edge[1])+"\t"+str(edge[2]["weight"]))
+        
+        return graphFiltered, infoGraphFiltered, graphComplete, infoGraphComplete
 
 
     

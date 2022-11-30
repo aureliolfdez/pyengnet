@@ -40,20 +40,17 @@ def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, re
 def saveFile(path = '', graph = None):
     
     if graph == None or len(graph) > 0:
-        with open(path+'graphComplete.csv', 'w') as fp:
+        with open(path, 'w') as fp:
             for iLine in graph:
                 fp.write("%s\n" % iLine)
         print('INFO: Graph complete exported to file')
     
 def showGraph(graph,title=None):
     
-    graphComplete = nx.Graph()
-    graphComplete.add_edges_from(graph)
-    
-    pos = nx.spring_layout(graphComplete,k=100)
-    nx.draw_networkx_nodes(graphComplete, pos, cmap=plt.get_cmap('jet'), node_size = 500)
-    nx.draw_networkx_labels(graphComplete, pos)
-    nx.draw_networkx_edges(graphComplete, pos, arrows=False)
-    nx.draw_networkx_edge_labels(graphComplete, pos, edge_labels=nx.get_edge_attributes(graphComplete, 'weight'))
+    pos = nx.spring_layout(graph,k=100)
+    nx.draw_networkx_nodes(graph, pos, cmap=plt.get_cmap('jet'), node_size = 500)
+    nx.draw_networkx_labels(graph, pos)
+    nx.draw_networkx_edges(graph, pos, arrows=False)
+    nx.draw_networkx_edge_labels(graph, pos, edge_labels=nx.get_edge_attributes(graph, 'weight'))
     plt.title(title)
     plt.show()
