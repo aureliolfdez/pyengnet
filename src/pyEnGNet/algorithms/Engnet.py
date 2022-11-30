@@ -46,6 +46,7 @@ class Engnet:
             lista.append((lenpartes * i, end))
         return lista
 
+    # Don't use
     @staticmethod
     def __calculate_weight(tests):
         weight = []
@@ -111,9 +112,13 @@ class Engnet:
         if major_voting >= 2:
             if saveComplete == True:
                 testsOutput_values.append(str(dataset.gene[i])+"\t"+str(dataset.gene[j])+"\t"+str(tests[0][1])+"\t"+str(tests[1][1])+"\t"+str(tests[2][1]))
-                
+            
+            #accepted_values.append(
+            #    [dataset.gene[i], dataset.gene[j], {'weight': round(Engnet.__calculate_weight(tests),2)}])
+            
+            media = (tests[0][1]+tests[1][1]+tests[2][1])/3.0
             accepted_values.append(
-                [dataset.gene[i], dataset.gene[j], {'weight': round(Engnet.__calculate_weight(tests),2)}])
+                [dataset.gene[i], dataset.gene[j], {'weight': round(media,4)}])
             
     
     @staticmethod
