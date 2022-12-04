@@ -26,10 +26,11 @@ class Dataset:
         Number of cores used        
     """
     
-    def __init__(self, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+    def __init__(self, filePath = None, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
        
         self._data = data
         self._gene = gene
+        self._filePath = filePath
         
         if data is not None:
             self._row_size = len(data)
@@ -45,6 +46,14 @@ class Dataset:
         self._readded_edges_threshold = readded_th
         self._ncores = cores
     
+    @property
+    def filePath(self):
+        return self._filePath
+    
+    @filePath.setter
+    def filePath(self, filePath):
+        self._filePath = filePath
+        
     @property
     def data(self):
         return self._data

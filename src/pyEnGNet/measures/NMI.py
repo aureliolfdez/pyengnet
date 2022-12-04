@@ -14,8 +14,8 @@ class NMI:
             iExpr = genNormalized[iColumn]
             probMap[iExpr] = probMap[iExpr] + 1
             iColumn += 1
-        iCont = 0
         
+        iCont = 0        
         while (iCont < maxValGene):
             probMap[iCont] = probMap[iCont] / size
             iCont += 1
@@ -42,7 +42,7 @@ class NMI:
             valGen2Column = gen2[iColumn]
             
             probMap[valGen1Column] = probMap[valGen1Column] + 1
-            probMap[valGen2Column + maxValGene1] = probMap[valGen2Column + maxValGene1] + 1
+            probMap[valGen2Column + maxValGene1] = probMap[valGen2Column + maxValGene1] + 1            
             probMap[(valGen1Column + maxValGene1 * valGen2Column) + (maxValGene1 + maxValGene2)] = probMap[(valGen1Column + maxValGene1 * valGen2Column) + (maxValGene1 + maxValGene2)] + 1
             iColumn += 1
                 
@@ -51,7 +51,7 @@ class NMI:
             if probMap[iCont] > 0.0:
                 probMap[iCont] = probMap[iCont] / size
             iCont += 1
-                
+        
         nMI = 0.0
         iCont = 0
         subtotal = maxValGene1 * maxValGene2
@@ -77,7 +77,7 @@ class NMI:
         gen2Normalized = [0] * (len(gen2))
         maxValGene1 = Normalization.normalizedArray(gen1, gen1Normalized, len(gen1))
         maxValGene2 = Normalization.normalizedArray(gen2, gen2Normalized, len(gen2))
-    
+        
         try:
             value = 2.0 * NMI.__calculateMutualInformation(gen1Normalized, gen2Normalized, size, maxValGene1, maxValGene2) / (
                     NMI.__calculateEntropy(gen1Normalized,maxValGene1) + NMI.__calculateEntropy(gen2Normalized,maxValGene2))

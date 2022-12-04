@@ -133,7 +133,7 @@ class Engnet:
         return OutputEngnet(accepted,testsOutput)
     
     @staticmethod
-    def __mainmethod(dataset, saveComplete = False):
+    def __CPUmethod(dataset, saveComplete = False):
         intervalos = Engnet.__intervals(len(dataset.data), dataset.ncores)
         edges = []
         testsOutput = []
@@ -161,11 +161,28 @@ class Engnet:
         return graphComplete, testsOutput
     
     @staticmethod
-    def process(dataset, saveComplete = False):
+    def __GPUmethod(dataset, saveComplete = False, numGpus = 1, CC = 61):
+        makeCommand = 'cd src/pyEnGNet/cuEnGNet && make CC="'+str(CC)+'"'
+        os.system('cd src/pyEnGNet/cuEnGNet && make CC="'+str(CC)+'"')
+        os.system('./src/pyEnGNet/cuEnGNet/cuEnGNet --data '+str(dataset.filePath)+' --cors '+str(dataset.spearman_threshold)+' --cork '+str(dataset.kendall_threshold)+' --corn '+str(dataset.nmi_threshold)+' --gpu '+str(numGpus)+' --out')
+        
+        testsOutput = []
+        if saveComplete == True:
+            testsOutput.append("Source\tDestination\tNMI\tKendall\tSpearman")
+        
+        
+        
+        
+        
+    @staticmethod
+    def process(dataset, saveComplete = False, numGpus = None, computeCapability = None):
         
         # First step: Ensemble
-        graphComplete, infoGraphComplete = Engnet.__mainmethod(dataset, saveComplete)
-              
+        if(numGpus == None or numGpus < 1):
+            graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
+        else:
+            Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
+        
         # Second step: Pruning
         graphFiltered = nx.maximum_spanning_tree(graphComplete, weight='weight', algorithm="kruskal")
         graphFiltered = Engnet.__readd_edges(dataset, graphComplete, graphFiltered)
