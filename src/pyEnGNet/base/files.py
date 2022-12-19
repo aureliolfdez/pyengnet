@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import shutil
 
-def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th=2, cores=int(mp.cpu_count() / 2)):
     """
     Load data from a txt or csv file. (Reuse function)
     
@@ -35,7 +35,7 @@ def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, re
             dataset = np.asarray(pd.read_csv(path, sep=separator))
             gene = dataset[:,0]
             dataset = np.delete(dataset, 0, 1)
-            dataset = Dataset(filePath = path, data=dataset, gene=gene, nmi_th=nmi_th, spearman_th=spearman_th, kendall_th=kendall_th, readded_th=readded_th, cores=cores)    
+            dataset = Dataset(filePath = path, data=dataset, gene=gene, nmi_th=nmi_th, spearman_th=spearman_th, kendall_th=kendall_th, readded_th=readded_th, hub_th=hub_th, cores=cores)    
     return dataset
 
 def saveFile(path = '', graph = None):

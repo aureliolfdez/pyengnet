@@ -22,11 +22,14 @@ class Dataset:
     readded_edges_threshold : float
         If hubs exist in a network, edges whose weight exceeds the threshold indicated by this parameter shall be added.
     
+    hub_threshold : int
+        Threshold to determine if the node studie is a hub based on node degree.
+    
     ncores : int
         Number of cores used        
     """
     
-    def __init__(self, filePath = None, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, cores=int(mp.cpu_count() / 2)):
+    def __init__(self, filePath = None, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th=2,cores=int(mp.cpu_count() / 2)):
        
         self._data = data
         self._gene = gene
@@ -44,6 +47,7 @@ class Dataset:
         self._nmi_threshold = nmi_th
 
         self._readded_edges_threshold = readded_th
+        self._hub_threshold = hub_th
         self._ncores = cores
     
     @property
@@ -117,6 +121,14 @@ class Dataset:
     @readded_edges_threshold.setter
     def readded_edges_threshold(self, readded_edges_threshold):
         self._readded_edges_threshold = readded_edges_threshold
+    
+    @property
+    def hub_threshold(self):
+        return self._hub_threshold
+    
+    @hub_threshold.setter
+    def hub_threshold(self, hub_threshold):
+        self._hub_threshold = hub_threshold
     
     @property
     def ncores(self):

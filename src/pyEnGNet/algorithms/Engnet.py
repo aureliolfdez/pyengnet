@@ -46,15 +46,6 @@ class Engnet:
             lista.append((lenpartes * i, end))
         return lista
 
-    # Don't use
-    @staticmethod
-    def __calculate_weight(tests):
-        weight = []
-        for test in tests:
-            if bool(test[0]):
-                weight.append(test[1])
-        return np.mean(weight)
-
     @staticmethod
     def __readd_edges(dataset, graph0, graph2):
         """
@@ -69,15 +60,15 @@ class Engnet:
         """
         origin_edges = nx.to_edgelist(graph0)
         tree_edges = nx.to_edgelist(graph2)
-
+        
         # Obtain eliminated edges
         eliminated_edges = [edge for edge in origin_edges if edge not in tree_edges]
-
+        
         # Obtain hubs
-        detected_hubs = [graph2.degree(node) for node in graph2.nodes if graph2.degree(node) > 2]
-
+        detected_hubs = [graph2.degree(node) for node in graph2.nodes if graph2.degree(node) > dataset.hub_threshold]
+        
         if len(detected_hubs) != 0:
-            mean_degree = round(np.mean([graph2.degree(node) for node in graph2.nodes if graph2.degree(node) > 2]))
+            mean_degree = round(np.mean([graph2.degree(node) for node in graph2.nodes if graph2.degree(node) > dataset.hub_threshold]))
             hubs = []
             for node in graph2.nodes:
                 if graph2.degree(node) >= mean_degree:
@@ -169,10 +160,6 @@ class Engnet:
         testsOutput = []
         if saveComplete == True:
             testsOutput.append("Source\tDestination\tNMI\tKendall\tSpearman")
-        
-        
-        
-        
         
     @staticmethod
     def process(dataset, saveComplete = False, numGpus = None, computeCapability = None):
