@@ -1,4 +1,6 @@
 import scipy.stats as scp
+import warnings
+import numpy as np
 
 class Kendall:
 
@@ -13,8 +15,13 @@ class Kendall:
         :return:
         """
         ans = 0
-        corr, pv = scp.kendalltau(arr1, arr2)
+        corr = 0
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            corr, pv = scp.kendalltau(arr1, arr2)
+            if corr is np.nan:
+                corr = 0
         corr = abs(corr)
         if corr >= dataset.kendall_threshold:
             ans = 1
-        return ans, corr    
+        return ans, corr

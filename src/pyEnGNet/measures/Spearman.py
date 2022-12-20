@@ -1,4 +1,6 @@
 import scipy.stats as scp
+import numpy as np
+import warnings
 
 class Spearman:
     
@@ -13,7 +15,12 @@ class Spearman:
         :return:
         """
         ans = 0
-        corr, pv = scp.spearmanr(arr1, arr2)
+        corr = 0
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            corr, pv = scp.spearmanr(arr1, arr2, nan_policy='omit')
+            if corr is np.nan:
+                corr = 0
         corr = abs(corr)
         if corr >= dataset.spearman_threshold:
             ans = 1

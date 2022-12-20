@@ -32,7 +32,7 @@ def load(path, separator = "\t", nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, re
         extensionsCsv = [".txt",".csv"]    
         fileName, fileExtension = os.path.splitext(path)
         if fileExtension in extensionsCsv:
-            dataset = np.asarray(pd.read_csv(path, sep=separator))
+            dataset = np.asarray(pd.read_csv(path, sep=separator).dropna())
             gene = dataset[:,0]
             dataset = np.delete(dataset, 0, 1)
             dataset = Dataset(filePath = path, data=dataset, gene=gene, nmi_th=nmi_th, spearman_th=spearman_th, kendall_th=kendall_th, readded_th=readded_th, hub_th=hub_th, cores=cores)    
