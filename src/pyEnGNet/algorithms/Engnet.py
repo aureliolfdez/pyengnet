@@ -171,7 +171,7 @@ class Engnet:
             Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
         
         # Second step: Pruning
-        graphFiltered = nx.maximum_spanning_tree(graphComplete, weight='weight', algorithm="kruskal")
+        graphFiltered = nx.minimum_spanning_tree(graphComplete) # Kruskal        
         graphFiltered = Engnet.__readd_edges(dataset, graphComplete, graphFiltered)
         edgesFiltered = nx.to_edgelist(graphFiltered)
         
