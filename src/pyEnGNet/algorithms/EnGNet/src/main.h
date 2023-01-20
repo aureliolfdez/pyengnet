@@ -1,7 +1,6 @@
 #ifndef EXTERN
 #define EXTERN extern
 #endif
-
 #include <thread>
 #include <iostream>
 #include <numeric>
@@ -11,7 +10,6 @@
 #include <stdint.h>
 #include <ctype.h>
 #include <unistd.h>
-#include <vector>
 #include <fstream>
 #include <sstream>
 #include <limits>
@@ -33,19 +31,21 @@
 #include <mutex>
 #include <cctype>
 #include <string.h>
+#include <list>
 
 using namespace std;
 
 EXTERN string sDataPath, sDelimiter;
-EXTERN int iHeaderColumns, iDeviceCount;
+EXTERN int iHeaderColumns, iDeviceCount, maxValueDataset;
 EXTERN bool bOutput;
 EXTERN double correctionThresholdSpearman, correctionThresholdKendall, correctionThresholdNMI;
 EXTERN float *mData;
 EXTERN int *mDataNormalized;
 EXTERN ulong ulRowsData, ulColsData, patternSize,maxPairs, maxThreadsPerBlock, maxBlocksPerGrid, maxIteratorGPU, lastBlocksGrid;
+EXTERN vector<string> geneNames;
 
 // Preprocess
-bool preprocess();
+void preprocess();
 bool readerData();
 void normalizedData();
 void countColumnData(string sLine);

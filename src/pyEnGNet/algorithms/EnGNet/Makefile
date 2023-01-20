@@ -18,4 +18,4 @@ src/correlations.o: src/correlations.cu
 	nvcc -G -g -O0 -std=c++11 --compile --relocatable-device-code=false -gencode arch=compute_$(CC),code=compute_$(CC) -gencode arch=compute_$(CC),code=sm_$(CC)  -x cu -o  "src/correlations.o" "src/correlations.cu"
 
 clean:
-	rm -R src/*.o src/*.d results/* $(program_NAME) ./results
+	rm -R ./src/*.o ./src/*.d $(program_NAME)

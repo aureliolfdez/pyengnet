@@ -2,14 +2,13 @@
 #include <getopt.h>
 using namespace std;
 
-bool preprocess()
+void preprocess()
 {
     bool bSuccess = readerData();
     if (bSuccess)
     {
         normalizedData();
     }
-    return bSuccess;
 }
 
 bool readerData()
@@ -47,6 +46,7 @@ bool readerData()
             size_t pos = 0;
             string line = rowsArray_Aux[ulCountRow];
             string token = line.substr(0, line.find(sDelimiter));
+            geneNames.push_back(token);
             line.erase(0, line.find(sDelimiter) + sDelimiter.length());
 
             do
@@ -82,6 +82,7 @@ void countColumnData(string sLine)
     } while (pos != std::string::npos);
 }
 
+// Last column of mDataNormalized store the maxValGene variable
 void normalizedData()
 {
     mDataNormalized = (int *)malloc(ulRowsData * (ulColsData + 1) * sizeof(int));
@@ -107,10 +108,15 @@ void normalizedData()
         for (unsigned long ulCountCol = 0; ulCountCol < ulColsData; ulCountCol++)
         {
             *(mDataNormalized + ulCountRow * (ulColsData + 1) + ulCountCol) = *(mData + ulCountRow * ulColsData + ulCountCol) - minValue;
+            //cout << *(mDataNormalized + ulCountRow * (ulColsData + 1) + ulCountCol) << " ";
         }
+        //cout << endl;
 
         maxValue = maxValue - minValue + 1;
-        *(mDataNormalized + ulCountRow * (ulColsData + 1) + ulColsData) =  maxValue;
+        *(mDataNormalized + ulCountRow * (ulColsData + 1) + ulColsData) =  maxValue;     
+        if(maxValueDataset < maxValue){
+            maxValueDataset = maxValue;
+        }
     }
 }
 

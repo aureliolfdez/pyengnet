@@ -337,4 +337,8 @@ src/correlations.o : src/correlations.cu \
     /usr/include/c++/11/bits/unordered_set.h \
     /usr/include/c++/11/mutex \
     /usr/include/c++/11/bits/std_mutex.h \
-    /usr/include/c++/11/bits/unique_lock.h
+    /usr/include/c++/11/bits/unique_lock.h \
+    /usr/include/c++/11/list \
+    /usr/include/c++/11/bits/stl_list.h \
+    /usr/include/c++/11/bits/allocated_ptr.h \
+    /usr/include/c++/11/bits/list.tcc

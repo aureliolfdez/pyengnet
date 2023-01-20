@@ -8,6 +8,7 @@ import numpy as np
 from tqdm import tqdm
 import multiprocessing as mp
 import math
+import subprocess
 
 
 class OutputEngnet:
@@ -153,13 +154,29 @@ class Engnet:
     
     @staticmethod
     def __GPUmethod(dataset, saveComplete = False, numGpus = 1, CC = 61):
-        makeCommand = 'cd src/pyEnGNet/cuEnGNet && make CC="'+str(CC)+'"'
-        os.system('cd src/pyEnGNet/cuEnGNet && make CC="'+str(CC)+'"')
-        os.system('./src/pyEnGNet/cuEnGNet/cuEnGNet --data '+str(dataset.filePath)+' --cors '+str(dataset.spearman_threshold)+' --cork '+str(dataset.kendall_threshold)+' --corn '+str(dataset.nmi_threshold)+' --gpu '+str(numGpus)+' --out')
+        os.system('cd src/pyEnGNet/algorithms/EnGNet && make clean')
+        os.system('cd src/pyEnGNet/algorithms/EnGNet && make CC="'+str(CC)+'"')
+        os.system('./src/pyEnGNet/algorithms/EnGNet/cuEnGNet --data '+str(dataset.filePath)+' --cors '+str(dataset.spearman_threshold)+' --cork '+str(dataset.kendall_threshold)+' --corn '+str(dataset.nmi_threshold)+' --gpu '+str(numGpus)+' --out')
         
+        accepted = []
         testsOutput = []
+        
         if saveComplete == True:
             testsOutput.append("Source\tDestination\tNMI\tKendall\tSpearman")
+        
+        for iGpu in range(numGpus):        
+            resultsTest = np.asarray(pd.read_csv("results/results_GPU_"+str(iGpu)+".csv", sep=";"))
+            for test in resultsTest:
+                media = (test[2]+test[3]+test[4])/3.0
+                accepted.append([test[0], test[1], {'weight': round(media,4)}])
+
+                if saveComplete == True: 
+                    testsOutput.append(str(test[0])+"\t"+str(test[1])+"\t"+str(test[2])+"\t"+str(test[3])+"\t"+str(test[4]))
+
+        graphComplete = nx.Graph()
+        graphComplete.add_edges_from(accepted)
+        
+        return graphComplete, testsOutput
         
     @staticmethod
     def process(dataset, saveComplete = False, numGpus = None, computeCapability = None):
@@ -168,7 +185,7 @@ class Engnet:
         if(numGpus == None or numGpus < 1):
             graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
         else:
-            Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
+            graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
         
         # Second step: Pruning
         graphFiltered = nx.minimum_spanning_tree(graphComplete) # Kruskal        

@@ -30,8 +30,6 @@ class NMI:
             
         dEntropy /= math.log(LOG_BASE) # n / Math.log(Entropy.LOG_BASE)
         
-        print(dEntropy)
-        
         return dEntropy
     
     @staticmethod
