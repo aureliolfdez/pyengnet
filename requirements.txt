@@ -1,0 +1,8 @@
+# requeriments
+numpy
+tqdm
+multiprocess
+pandas
+matplotlib
+networkx
+scipy
