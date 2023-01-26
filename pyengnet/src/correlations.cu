@@ -97,7 +97,7 @@ __global__ void kendallTwoGenes(ulong lCombination, double *aResultKendalls, ulo
 }
 
 // Spearman
-__global__ void spearmanCalcRanks(double *fSpearmanStats, double *fSpearmanRankG1, double *fSpearmanRankG2, ulong maxPairs, int id, ulong pairsPerGpuPrevious, float *mDataGPU, ulong totalPairs, ulong pairsPerRun, int iter, ulong totalFor)
+/*__global__ void spearmanCalcRanks(double *fSpearmanStats, double *fSpearmanRankG1, double *fSpearmanRankG2, ulong maxPairs, int id, ulong pairsPerGpuPrevious, float *mDataGPU, ulong totalPairs, ulong pairsPerRun, int iter, ulong totalFor)
 {
 	ulong idTh = blockIdx.x * blockDim.x + threadIdx.x;
         ulong pattern = idTh + (totalFor * (iter - 1)) + pairsPerGpuPrevious + totalPairs;
@@ -123,6 +123,8 @@ __global__ void spearmanCalcRanks(double *fSpearmanStats, double *fSpearmanRankG
 		if (r1 < rows && r2 < rows)
 		{
 			double dMeanG1 = 0, dMeanG2 = 0;
+			*(fSpearmanStats + idTh * 4 + 0) = 0;
+			*(fSpearmanStats + idTh * 4 + 1) = 0;
 			for (int iConditions = 0; iConditions < cols; iConditions++)
 			{
 				double numEqualOrdG1 = 1.0, readG1 = 1.0, numEqualOrdG2 = 1.0, readG2 = 1.0;
@@ -151,12 +153,77 @@ __global__ void spearmanCalcRanks(double *fSpearmanStats, double *fSpearmanRankG
 				}
 				*(fSpearmanRankG1 + idTh * cols + iConditions) = readG1 + ((numEqualOrdG1-1.0) * 0.5);
 				*(fSpearmanRankG2 + idTh * cols + iConditions) = readG2 + ((numEqualOrdG2-1.0) * 0.5);
-				dMeanG1 += *(fSpearmanRankG1 + idTh * cols + iConditions);
-				dMeanG2 += *(fSpearmanRankG2 + idTh * cols + iConditions);				
+				*(fSpearmanStats + idTh * 4 + 0) += *(fSpearmanRankG1 + idTh * cols + iConditions);
+				*(fSpearmanStats + idTh * 4 + 1) += *(fSpearmanRankG2 + idTh * cols + iConditions);				
 			}
 
-			*(fSpearmanStats + idTh * 2 + 0) = dMeanG1 / cols;
-			*(fSpearmanStats + idTh * 2 + 1) = dMeanG2 / cols;
+			*(fSpearmanStats + idTh * 4 + 0) = *(fSpearmanStats + idTh * 4 + 0) / cols;
+			*(fSpearmanStats + idTh * 4 + 1) = *(fSpearmanStats + idTh * 4 + 1) / cols;
+		}
+	}
+}*/
+
+__global__ void spearmanCalcRanks(double *fSpearmanStats, double *fSpearmanRankG1, double *fSpearmanRankG2, ulong maxPairs, int id, ulong pairsPerGpuPrevious, float *mDataGPU, ulong totalPairs, ulong pairsPerRun, int iter, ulong totalFor)
+{
+	ulong idTh = blockIdx.x * blockDim.x + threadIdx.x;
+        ulong pattern = idTh + (totalFor * (iter - 1)) + pairsPerGpuPrevious + totalPairs;
+        if (pattern < maxPairs)
+	{
+		long r1 = 0;
+		long r2 = -1;
+		long auxPat = pattern - rows + 1;
+		if (auxPat < 0)
+		{
+			r2 = auxPat + rows;
+		}
+		for (ulong j = rows - 2; r2 == -1; j--)
+		{
+			auxPat = auxPat - j;
+			r1++;
+			if (auxPat < 0)
+			{
+				r2 = (j + auxPat) + (r1 + 1);
+			}
+		}
+
+		if (r1 < rows && r2 < rows)
+		{
+			*(fSpearmanStats + idTh * 4 + 0) = 0;
+			*(fSpearmanStats + idTh * 4 + 1) = 0;
+			for (int iConditions = 0; iConditions < cols; iConditions++)
+			{
+				double numEqualOrdG1 = 1.0, readG1 = 1.0, numEqualOrdG2 = 1.0, readG2 = 1.0;
+				for (int iCont = 0; iCont < cols; iCont++)
+				{
+					if (iCont != iConditions)
+					{
+						if (*(mDataGPU + r1 * cols + iCont) < *(mDataGPU + r1 * cols + iConditions))
+						{
+							readG1 += 1.0;
+						}
+						else if (*(mDataGPU + r1 * cols + iCont) == *(mDataGPU + r1 * cols + iConditions))
+						{
+							numEqualOrdG1 += 1.0;
+						}
+
+						if (*(mDataGPU + r2 * cols + iCont) < *(mDataGPU + r2 * cols + iConditions))
+						{
+							readG2 += 1.0;
+						}
+						else if (*(mDataGPU + r2 * cols + iCont) == *(mDataGPU + r2 * cols + iConditions))
+						{
+							numEqualOrdG2 += 1.0;
+						}
+					}
+				}
+				*(fSpearmanRankG1 + idTh * cols + iConditions) = readG1 + ((numEqualOrdG1-1.0) * 0.5);
+				*(fSpearmanRankG2 + idTh * cols + iConditions) = readG2 + ((numEqualOrdG2-1.0) * 0.5);
+				*(fSpearmanStats + idTh * 4 + 0) += *(fSpearmanRankG1 + idTh * cols + iConditions);
+				*(fSpearmanStats + idTh * 4 + 1) += *(fSpearmanRankG2 + idTh * cols + iConditions);				
+			}
+
+			*(fSpearmanStats + idTh * 4 + 0) = *(fSpearmanStats + idTh * 4 + 0) / cols;
+			*(fSpearmanStats + idTh * 4 + 1) = *(fSpearmanStats + idTh * 4 + 1) / cols;
 		}
 	}
 }
@@ -167,13 +234,14 @@ __global__ void spearmanCovariance(double *fSpearmanStats, double *aResultSpearm
     ulong pattern = idTh + (totalFor * (iter - 1)) + pairsPerGpuPrevious + totalPairs;
     if (pattern < maxPairs)
 	{
-		double dCovariance = 0;
+		//double dCovariance = 0;
+		*(fSpearmanStats + idTh * 4 + 2) = 0;
 		for (int iConditions = 0; iConditions < cols; iConditions++)
 		{
-			dCovariance += (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 0)) * (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 1));
+			*(fSpearmanStats + idTh * 4 + 2) += (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 0)) * (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 1));
 		}
 
-		*(aResultSpearmans + idTh) = dCovariance / (cols - 1);
+		*(aResultSpearmans + idTh) = *(fSpearmanStats + idTh * 4 + 2) / (cols - 1);
 	}
 }
 
@@ -183,17 +251,19 @@ __global__ void spearmanCalcValue(double *fSpearmanStats, double *aResultSpearma
     ulong pattern = idTh + (totalFor * (iter - 1)) + pairsPerGpuPrevious + totalPairs;
     if (pattern < maxPairs)
 	{
-		double dStdG1 = 0, dStdG2 = 0;
+		//double dStdG1 = 0, dStdG2 = 0;
+		*(fSpearmanStats + idTh * 4 + 2) = 0;
+		*(fSpearmanStats + idTh * 4 + 3) = 0;
 		for (int iConditions = 0; iConditions < cols; iConditions++)
 		{
-			dStdG1 += (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 0)) * (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 0));
-			dStdG2 += (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 1)) * (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 2 + 1));
+			*(fSpearmanStats + idTh * 4 + 2) += (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 0)) * (*(fSpearmanRankG1 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 0));
+			*(fSpearmanStats + idTh * 4 + 3) += (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 1)) * (*(fSpearmanRankG2 + idTh * cols + iConditions) - *(fSpearmanStats + idTh * 4 + 1));
 		}
 
-		dStdG1 = (double)(sqrtf(dStdG1 / (cols - 1)));
-		dStdG2 = (double)(sqrtf(dStdG2 / (cols - 1)));
+		*(fSpearmanStats + idTh * 4 + 2) = (double)(sqrtf(*(fSpearmanStats + idTh * 4 + 2) / (cols - 1)));
+		*(fSpearmanStats + idTh * 4 + 3) = (double)(sqrtf(*(fSpearmanStats + idTh * 4 + 3) / (cols - 1)));
 
-		*(aResultSpearmans + idTh) = *(aResultSpearmans + idTh) / (dStdG1 * dStdG2);
+		*(aResultSpearmans + idTh) = *(aResultSpearmans + idTh) / (*(fSpearmanStats + idTh * 4 + 2) * *(fSpearmanStats + idTh * 4 + 3));
 	}
 }
 
@@ -436,8 +506,8 @@ void threadsPerDevice(int id, cudaStream_t s, ulong chunks,
 		cudaMemset(fSpearmanRankG1, 0, pairsPerRun * ulColsData * sizeof(double));
 		cudaMalloc((void **)&fSpearmanRankG2, pairsPerRun * ulColsData * sizeof(double));
 		cudaMemset(fSpearmanRankG2, 0, pairsPerRun * ulColsData * sizeof(double));
-		cudaMalloc((void **)&fSpearmanStats, pairsPerRun * 2 * sizeof(double));
-		cudaMemset(fSpearmanStats, 0, pairsPerRun * 2 * sizeof(double));
+		cudaMalloc((void **)&fSpearmanStats, pairsPerRun * 4 * sizeof(double));
+		cudaMemset(fSpearmanStats, 0, pairsPerRun * 4 * sizeof(double));
 		cudaMalloc((void **)&dNMIResults, pairsPerRun * ((maxValueDataset + maxValueDataset) + (maxValueDataset * maxValueDataset) + 3) * sizeof(float));
 		cudaMemset(dNMIResults, 0, pairsPerRun * ((maxValueDataset + maxValueDataset) + (maxValueDataset * maxValueDataset) + 3) * sizeof(float));
 
@@ -513,8 +583,10 @@ void threadsPerDevice(int id, cudaStream_t s, ulong chunks,
 			cudaMemcpyFromSymbol(&numResultNMICpu, numResultNMI,
 								 sizeof(unsigned long long int), 0, cudaMemcpyDeviceToHost);
 
-			fileResults << "g1;g2;nmi;kendall;spearman"
+			if(largeScale == 0){
+				fileResults << "g1;g2;nmi;kendall;spearman"
 						<< "\n";
+			}
 			for (ulong iRow = 0; iRow < pairsPerRun; iRow++)
 			{
 				ulong pattern = iRow + pairsPerGpuPrevious;
@@ -636,7 +708,7 @@ double runAlgorithm()
 		sizeResultsSpearman = (pairsPerGpu * sizeof(double));
 		fSpearmanRankG1 = (pairsPerGpu * ulColsData * sizeof(double));
 		fSpearmanRankG2 = (pairsPerGpu * ulColsData * sizeof(double));
-		fSpearmanStats = (pairsPerGpu * 2 * sizeof(double)); // [1] --> Mean of rank G1; [2] --> Mean of rank G2;
+		fSpearmanStats = (pairsPerGpu * 4 * sizeof(double)); // [1] --> Mean of rank G1; [2] --> Mean of rank G2; ; [3] --> aux ; [4] --> aux
 		dNMIResults = (pairsPerGpu * ((maxValueDataset + maxValueDataset) + (maxValueDataset * maxValueDataset) + 3) * sizeof(float)); // [0] --> Mutual information ::: NMI [1] --> entropyGen1 ::: [2] --> entropyGen2 ::: [3 - maxValueDataset] --> probMaps
 		chunks[i] = ((sizeResultKendall + sizeResultsSpearman + fSpearmanRankG1 + fSpearmanRankG2 + fSpearmanStats + dNMIResults) / availableMemory) + 1;
 		pairsPerRun[i] = pairsPerGpu / chunks[i];
