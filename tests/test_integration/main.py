@@ -5,7 +5,7 @@ from pyengnet.Engnet import Engnet
 
 if __name__ == "__main__":
     
-    dataset = File.load(path=os.getcwd()+"/datasets/TCGA/expression_good.csv", separator=",", nmi_th=0.6, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th = 3)    
+    dataset = File.load(path=os.getcwd()+"/datasets/TCGA/expression_poor.csv", separator=",", nmi_th=0.6, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th = 3)    
     #dataset = File.load(path=os.getcwd()+"/datasets/Spellman.csv", separator=",", nmi_th=0.6, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th = 3)    
 
     # Execute EnGNet
