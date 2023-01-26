@@ -3,33 +3,22 @@ import multiprocessing as mp
 class Dataset:
     
     """
-    This class is a Dataset model
-
-    Parameters
-    ----------
-    data : Array
-        Original dataset
-        
-    spearman_threshold : float
-        Spearman threshold
-    
-    kendall_threshold : float
-        Kendall threshold
-    
-    nmi_threshold : float
-        NMI threshold
-    
-    readded_edges_threshold : float
-        If hubs exist in a network, edges whose weight exceeds the threshold indicated by this parameter shall be added.
-    
-    hub_threshold : int
-        Threshold to determine if the node studie is a hub based on node degree.
-    
-    ncores : int
-        Number of cores used        
+    This class represents a Dataset model
     """
     
     def __init__(self, filePath = None, data=None, gene = None, nmi_th=0.7, spearman_th=0.7, kendall_th=0.7, readded_th=0.7, hub_th=2,cores=int(mp.cpu_count() / 2)):
+       
+        """
+        Inits Dataset with input dataset
+        
+        :param data: Array: Original dataset
+        :param spearman_threshold: float: Spearman threshold
+        :param kendall_threshold: float: Kendall threshold
+        :param nmi_threshold: float: NMI threshold
+        :param readded_edges_threshold: float: If hubs exist in a network, edges whose weight exceeds the threshold indicated by this parameter shall be added.
+        :param hub_threshold: int: Threshold to determine if the node studie is a hub based on node degree.
+        :param ncores: int: Number of cores used   
+        """
        
         self._data = data
         self._gene = gene

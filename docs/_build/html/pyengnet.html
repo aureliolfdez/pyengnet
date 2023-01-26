@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pyengnet package &mdash; pyEnGNet 0.1.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="setup module" href="setup.html" />
+    <link rel="prev" title="pyEnGNet" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pyEnGNet
+          </a>
+              <div class="version">
+                0.1.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pyEnGNet</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pyengnet package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.Dataset">pyengnet.Dataset module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Dataset.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.Engnet">pyengnet.Engnet module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Engnet.Engnet"><code class="docutils literal notranslate"><span class="pre">Engnet</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Engnet.OutputEngnet"><code class="docutils literal notranslate"><span class="pre">OutputEngnet</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.File">pyengnet.File module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.File.File"><code class="docutils literal notranslate"><span class="pre">File</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.Kendall">pyengnet.Kendall module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Kendall.Kendall"><code class="docutils literal notranslate"><span class="pre">Kendall</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.NMI">pyengnet.NMI module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.NMI.NMI"><code class="docutils literal notranslate"><span class="pre">NMI</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.Normalization">pyengnet.Normalization module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Normalization.Normalization"><code class="docutils literal notranslate"><span class="pre">Normalization</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.Spearman">pyengnet.Spearman module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pyengnet.Spearman.Spearman"><code class="docutils literal notranslate"><span class="pre">Spearman</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet.version">pyengnet.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pyengnet">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pyEnGNet</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">pyEnGNet</a></li>
+      <li class="breadcrumb-item active">pyengnet package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyengnet.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pyengnet-package">
+<h1>pyengnet package<a class="headerlink" href="#pyengnet-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-pyengnet.Dataset">
+<span id="pyengnet-dataset-module"></span><h2>pyengnet.Dataset module<a class="headerlink" href="#module-pyengnet.Dataset" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filePath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gene</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmi_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spearman_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kendall_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readded_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hub_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Dataset.Dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class represents a Dataset model</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.column_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">column_size</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.column_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.data" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.filePath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">filePath</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.filePath" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.gene">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gene</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.gene" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.hub_threshold">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hub_threshold</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.hub_threshold" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.kendall_threshold">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kendall_threshold</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.kendall_threshold" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.ncores">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ncores</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.ncores" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.nmi_threshold">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nmi_threshold</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.nmi_threshold" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.readded_edges_threshold">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">readded_edges_threshold</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.readded_edges_threshold" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.row_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">row_size</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.row_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Dataset.Dataset.spearman_threshold">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spearman_threshold</span></span><a class="headerlink" href="#pyengnet.Dataset.Dataset.spearman_threshold" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.Engnet">
+<span id="pyengnet-engnet-module"></span><h2>pyengnet.Engnet module<a class="headerlink" href="#module-pyengnet.Engnet" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Engnet.Engnet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Engnet.</span></span><span class="sig-name descname"><span class="pre">Engnet</span></span><a class="headerlink" href="#pyengnet.Engnet.Engnet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.Engnet.Engnet.edge_corr_validation">
+<span class="sig-name descname"><span class="pre">edge_corr_validation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveComplete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Engnet.Engnet.edge_corr_validation" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.Engnet.Engnet.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saveComplete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numGpus</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">computeCapability</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Engnet.Engnet.process" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Engnet.OutputEngnet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Engnet.</span></span><span class="sig-name descname"><span class="pre">OutputEngnet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accepted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">testsOutput</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Engnet.OutputEngnet" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Engnet.OutputEngnet.accepted">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accepted</span></span><a class="headerlink" href="#pyengnet.Engnet.OutputEngnet.accepted" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyengnet.Engnet.OutputEngnet.testsOutput">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">testsOutput</span></span><a class="headerlink" href="#pyengnet.Engnet.OutputEngnet.testsOutput" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.File">
+<span id="pyengnet-file-module"></span><h2>pyengnet.File module<a class="headerlink" href="#module-pyengnet.File" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.File.File">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.File.</span></span><span class="sig-name descname"><span class="pre">File</span></span><a class="headerlink" href="#pyengnet.File.File" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.File.File.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">separator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\t'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nmi_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spearman_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kendall_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">readded_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hub_th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.File.File.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load data from a txt or csv file. (Reuse function)</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt>path<span class="classifier">str</span></dt><dd><p>The path where the file is stored.</p>
+</dd>
+<dt>separator: str</dt><dd><p>An attribute indicating how the columns of the file are separated. 
+Default: tab.</p>
+</dd>
+</dl>
+</section>
+<section id="return-pandas-dataframe">
+<h3>Return : pandas.DataFrame<a class="headerlink" href="#return-pandas-dataframe" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><p>A NumPy array from the reading of a file.</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.File.File.saveFile">
+<span class="sig-name descname"><span class="pre">saveFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.File.File.saveFile" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.File.File.showGraph">
+<span class="sig-name descname"><span class="pre">showGraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.File.File.showGraph" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.Kendall">
+<span id="pyengnet-kendall-module"></span><h2>pyengnet.Kendall module<a class="headerlink" href="#module-pyengnet.Kendall" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Kendall.Kendall">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Kendall.</span></span><span class="sig-name descname"><span class="pre">Kendall</span></span><a class="headerlink" href="#pyengnet.Kendall.Kendall" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.Kendall.Kendall.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Kendall.Kendall.process" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Recibe dos vectores y calcula el coeficiente de correlación de Kendall entre ambos</dt><dd><p>ans -&gt; 1 si pasa el umbral, 0 en caso contrario
+corr -&gt; El valor resultante, en valor absoluto, del coeficiente de correlación de kendall</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr1</strong> – </p></li>
+<li><p><strong>arr2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.NMI">
+<span id="pyengnet-nmi-module"></span><h2>pyengnet.NMI module<a class="headerlink" href="#module-pyengnet.NMI" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.NMI.NMI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.NMI.</span></span><span class="sig-name descname"><span class="pre">NMI</span></span><a class="headerlink" href="#pyengnet.NMI.NMI" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.NMI.NMI.process">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.NMI.NMI.process" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.Normalization">
+<span id="pyengnet-normalization-module"></span><h2>pyengnet.Normalization module<a class="headerlink" href="#module-pyengnet.Normalization" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Normalization.Normalization">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Normalization.</span></span><span class="sig-name descname"><span class="pre">Normalization</span></span><a class="headerlink" href="#pyengnet.Normalization.Normalization" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.Normalization.Normalization.normalizedArray">
+<span class="sig-name descname"><span class="pre">normalizedArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genNormalized</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Normalization.Normalization.normalizedArray" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.Spearman">
+<span id="pyengnet-spearman-module"></span><h2>pyengnet.Spearman module<a class="headerlink" href="#module-pyengnet.Spearman" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyengnet.Spearman.Spearman">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyengnet.Spearman.</span></span><span class="sig-name descname"><span class="pre">Spearman</span></span><a class="headerlink" href="#pyengnet.Spearman.Spearman" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyengnet.Spearman.Spearman.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arr2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyengnet.Spearman.Spearman.process" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Recibe dos vectores y calcula el coeficiente de correlación de spearman entre ellos, devuelve:</dt><dd><p>ans -&gt; 1 si pasa el umbral, 0 en caso contrario
+corr -&gt; El coeficiente de correlación de spearman en valor absoluto</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr1</strong> – </p></li>
+<li><p><strong>arr2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyengnet.version">
+<span id="pyengnet-version-module"></span><h2>pyengnet.version module<a class="headerlink" href="#module-pyengnet.version" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-pyengnet">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyengnet" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="pyEnGNet" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="setup module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Aurelio Lopez-Fernandez.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
