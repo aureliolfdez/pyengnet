@@ -72,7 +72,7 @@ demonstrates the basic API for the generation of co-expression gene networks usi
 
       from pyengnet.Engnet import Engnet
 
-      graphFiltered, infoGraphFiltered, graphComplete, infoGraphComplete = Engnet.process(dataset, saveComplete = True, numGpus = 2)
+      graphFiltered, infoGraphFiltered, graphComplete, infoGraphComplete = Engnet.process(dataset, saveComplete = True, numGpus = 2, computeCapability = 61)
 
 #. Save gene co-expression networks output (optional)
 
