@@ -7,4 +7,5 @@ Changelog
 
 Initialize the project by Aurelio Lopez-Fernandez et al. in Jan 2023.
 
+* v<0.0.1>, <30/01/2023> -- Documentation update & multi-GPU execution error solved.
 * v<0.0.0>, <27/01/2023> -- Initial release.

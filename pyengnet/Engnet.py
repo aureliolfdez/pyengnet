@@ -213,7 +213,7 @@ class Engnet:
         
         return graphComplete, testsOutput
         
-    def process(dataset, saveComplete = False, numGpus = None):
+    def process(dataset, saveComplete = False, numGpus = None, computeCapability = None):
         
         """
         
@@ -230,13 +230,17 @@ class Engnet:
         numGpus: int, optional (default=None)
             Number of GPU devices to be used.
             
+        computeCapability: int
+            Compute Capability version of your GPU device (https://developer.nvidia.com/cuda-gpus).
+            
         """
         
         # First step: Ensemble
         if(numGpus == None or numGpus < 1):
             graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
         else:
-            graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus)
+            graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
+            #graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
         
         # Second step: Pruning
         graphFiltered = nx.minimum_spanning_tree(graphComplete) # Kruskal        

@@ -7,7 +7,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 # Setting up
 setup(
     name="pyengnet",
-    version='0.0.0',
+    version='0.0.1',
     author="Aurelio Lopez-Fernandez",
     author_email="alopfer1@upo.es",
     description='pyEnGNet: optimized reconstruction of gene co-expression networks using multi-GPU',
