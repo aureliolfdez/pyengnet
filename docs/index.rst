@@ -18,11 +18,6 @@ Welcome to pyEnGNet's documentation!
    :alt: Documentation Status
 
 
-.. image:: https://mybinder.org/badge_logo.svg
-   :target: https://mybinder.org/v2/gh/aureliolfdez/pyengnet/master
-   :alt: Binder
-
-
 .. image:: https://img.shields.io/github/stars/aureliolfdez/pyengnet.svg
    :target: https://github.com/aureliolfdez/pyEnGNet/stargazers
    :alt: GitHub stars
