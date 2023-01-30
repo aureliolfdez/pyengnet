@@ -4,6 +4,10 @@ import math
 
 class NMI:
     
+    """
+        NMI measurement class coded in a parallel ecosystem with CPUs.
+    """
+    
     def __calculateEntropy(genNormalized, maxValGene):
         LOG_BASE = 2.0
         probMap = [0.0] * (maxValGene)
@@ -88,6 +92,27 @@ class NMI:
     
     @staticmethod
     def process(dataset, arr1, arr2):
+        """
+        
+        Function that performs NMI's measure for two genes.
+                
+        Parameters
+        ----------
+        arr1: numpy.array
+            Array storing all the values of the dataset for a gene X.
+        
+        arr2: numpy.array
+            Array storing all the values of the dataset for a gene Y.
+        
+        Return : int, double
+        -------------------------
+            ans: int
+                This value indicates whether the calculated NMI's coefficient is valid according to the threshold offered by the user. If this variable stores the value 1, it is valid, whereas it is invalid if the stored value is 0.
+            
+            corr: double
+                NMI's coefficient calculated.
+            
+        """
         corr = NMI.__calculationNMI(arr1, arr2, len(arr1))
         if math.isnan(corr):
             corr = 0

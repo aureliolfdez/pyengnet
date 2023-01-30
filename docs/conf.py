@@ -11,9 +11,9 @@ import sys
 from os.path import dirname, abspath
 
 sys.path.insert(0, abspath('..'))
-combo_dir = dirname(dirname(abspath(__file__)))
+pyengnet_dir = dirname(dirname(abspath(__file__)))
 
-version_path = os.path.join(combo_dir, 'pyengnet', 'version.py')
+version_path = os.path.join(pyengnet_dir, 'pyengnet', 'version.py')
 exec(open(version_path).read())
 
 
@@ -40,8 +40,7 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'index'
 
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store','setup.py']
 
 
 # -- Options for HTML output -------------------------------------------------

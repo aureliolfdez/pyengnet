@@ -18,6 +18,10 @@ import pandas as pd
 
 class OutputEngnet:
     
+    """
+        Class used to save the complete network (phase 1 of the algorithm).        
+    """
+    
     def __init__(self, accepted=None, testsOutput = None):
        
         self._accepted = accepted
@@ -25,6 +29,9 @@ class OutputEngnet:
         
     @property
     def accepted(self):
+        """
+            Valid correlations after running phase 1 of the algorithm.
+        """
         return self._accepted
     
     @accepted.setter
@@ -33,6 +40,9 @@ class OutputEngnet:
     
     @property
     def testsOutput(self):
+        """
+            String associated to the valid correlations to be used if the user wants to save the network in an external file.
+        """
         return self._testsOutput
     
     @testsOutput.setter
@@ -40,6 +50,10 @@ class OutputEngnet:
         self._testsOutput = testsOutput
 
 class Engnet:
+    
+    """
+        Main class of the EnGNet algorithm.
+    """
     
     def __intervals(total, partes):
         lenpartes = int(total / partes)
@@ -117,6 +131,27 @@ class Engnet:
             
     
     def edge_corr_validation(dataset, start, end, saveComplete = False):
+        
+        """
+        
+        A function that represents what a CPU core should do.
+                
+        Parameters
+        ----------
+        dataset: numpy.array
+            The dataset stored in memory.
+        
+        start: int
+            Number of the row of the dataset to be started by a specific CPU core.
+            
+        end: int
+            Number of the row of the dataset to be ended by a specific CPU core.
+            
+        saveComplete: boolean, optional (default=False)
+            Flag indicating whether or not the user wants to store the networks in external files.
+            
+        """
+        
         accepted = []
         testsOutput = []
         
@@ -178,13 +213,30 @@ class Engnet:
         
         return graphComplete, testsOutput
         
-    def process(dataset, saveComplete = False, numGpus = None, computeCapability = None):
+    def process(dataset, saveComplete = False, numGpus = None):
+        
+        """
+        
+        Function that run EnGNet algorithm.
+                
+        Parameters
+        ----------
+        dataset: numpy.array
+            The dataset stored in memory.
+        
+        saveComplete: boolean, optional (default=False)
+            Flag indicating whether or not the user wants to store the networks in external files.
+        
+        numGpus: int, optional (default=None)
+            Number of GPU devices to be used.
+            
+        """
         
         # First step: Ensemble
         if(numGpus == None or numGpus < 1):
             graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
         else:
-            graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
+            graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus)
         
         # Second step: Pruning
         graphFiltered = nx.minimum_spanning_tree(graphComplete) # Kruskal        

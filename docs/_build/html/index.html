@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to pyEnGNet’s documentation! &mdash; pyEnGNet 0.1.2 documentation</title>
+  <title>Welcome to pyEnGNet’s documentation! &mdash; pyEnGNet 0.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -18,9 +18,10 @@
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/js/theme.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pyEnGNet" href="modules.html" /> 
+    <link rel="next" title="Installation" href="install.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -31,7 +32,7 @@
             <a href="#" class="icon icon-home"> pyEnGNet
           </a>
               <div class="version">
-                0.1.2
+                0.0.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -41,9 +42,20 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">pyEnGNet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples by Tasks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About us</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="release.html">Release History</a></li>
 </ul>
 
         </div>
@@ -72,13 +84,101 @@
              
   <section id="welcome-to-pyengnet-s-documentation">
 <h1>Welcome to pyEnGNet’s documentation!<a class="headerlink" href="#welcome-to-pyengnet-s-documentation" title="Permalink to this heading"></a></h1>
+<p><strong>Deployment &amp; Documentation &amp; Stats</strong></p>
+<a class="reference external image-reference" href="https://pypi.org/project/pyengnet/"><img alt="PyPI version" src="https://img.shields.io/badge/pypi-v0.0.0-brightgreen" /></a>
+<a class="reference external image-reference" href="https://pyengnet.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/pyengnet/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://mybinder.org/v2/gh/aureliolfdez/pyengnet/master"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/aureliolfdez/pyEnGNet/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/aureliolfdez/pyengnet.svg" /></a>
+<a class="reference external image-reference" href="https://github.com/aureliolfdez/pyEnGNet/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/aureliolfdez/pyengnet.svg?color=blue" /></a>
+<a class="reference external image-reference" href="https://github.com/aureliolfdez/pyEnGNet/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0%20license-green" /></a>
+<hr class="docutils" />
+<p>Abstract here</p>
+<p><strong>pyengnet</strong> is featured for:</p>
+<ul class="simple">
+<li><p><strong>Unified APIs, detailed documentation, and interactive examples</strong> available to the community.</p></li>
+<li><p><strong>Complete coverage</strong> for reconstruction of massive gene co-expression networks.</p></li>
+<li><p><strong>Optimized models</strong> to generate results in the shortest possible time.</p></li>
+<li><p><strong>Optimization of a High-Performance Computing (HPC) and Big Data ecosystem</strong>, using <a class="reference external" href="https://developer.nvidia.com/cuda-zone">cuda</a> and <a class="reference external" href="https://github.com/uqfoundation/multiprocess">multiprocess</a>.</p></li>
+</ul>
+<p><strong>API Demo</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pyengnet.File</span> <span class="kn">import</span> <span class="n">File</span>
+<span class="kn">from</span> <span class="nn">pyengnet.Engnet</span> <span class="kn">import</span> <span class="n">Engnet</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+   <span class="c1"># Load dataset</span>
+   <span class="n">dataset</span> <span class="o">=</span> <span class="n">File</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot;/datasets/Spellman.csv&quot;</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">nmi_th</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">spearman_th</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">kendall_th</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">readded_th</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">hub_th</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+   <span class="c1"># Run pyEnGNet on CPUs</span>
+   <span class="n">graphFiltered</span><span class="p">,</span> <span class="n">infoGraphFiltered</span><span class="p">,</span> <span class="n">graphComplete</span><span class="p">,</span> <span class="n">infoGraphComplete</span> <span class="o">=</span> <span class="n">Engnet</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">saveComplete</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+   <span class="c1"># Run pyEnGNet on GPU devices</span>
+   <span class="c1"># graphFiltered, infoGraphFiltered, graphComplete, infoGraphComplete = Engnet.process(dataset, saveComplete = True, numGpus = 2, computeCapability = 61)</span>
+
+   <span class="c1"># Save gene co-expression networks and additional information</span>
+   <span class="n">File</span><span class="o">.</span><span class="n">saveFile</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;/home/principalpc/Escritorio/graphComplete.csv&#39;</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="n">infoGraphComplete</span><span class="p">)</span> <span class="c1"># Full network</span>
+   <span class="n">File</span><span class="o">.</span><span class="n">saveFile</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;/home/principalpc/Escritorio/graphFiltered.csv&#39;</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="n">infoGraphFiltered</span><span class="p">)</span> <span class="c1"># Filtered network</span>
+
+   <span class="c1"># Print gene co-expression networks</span>
+   <span class="n">File</span><span class="o">.</span><span class="n">showGraph</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graphComplete</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Complete graph&#39;</span><span class="p">)</span> <span class="c1"># Full network</span>
+   <span class="n">File</span><span class="o">.</span><span class="n">showGraph</span><span class="p">(</span><span class="n">graph</span><span class="o">=</span><span class="n">graphFiltered</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Filtered graph&quot;</span><span class="p">)</span> <span class="c1"># Filtered network</span>
+</pre></div>
+</div>
+<p><strong>Citing pyEnGNet</strong>:</p>
+<p><a class="reference external" href="#">pyEnGNet paper</a> is published in
+<a class="reference external" href="#">(under review)</a>.
+If you use pyEnGNet in a scientific publication, we would appreciate citations to the following paper:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Under</span> <span class="n">review</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Under</span> <span class="n">review</span>
+</pre></div>
+</div>
+<p><strong>Key Links and Resources</strong>:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/aureliolfdez/pyEnGNet">View the latest codes on Github</a></p></li>
+<li><p><a class="reference external" href="https://pyengnet.readthedocs.io/">View the documentation &amp; API</a></p></li>
+<li><p><a class="reference external" href="https://github.com/aureliolfdez/pyEnGNet/tree/main/tests/test_integration">View all examples</a></p></li>
+</ul>
+<hr class="docutils" />
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">pyEnGNet</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pyengnet.html">pyengnet package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup.html">setup module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tests.html">tests package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples by Tasks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#run-on-cpu">Run on CPU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#run-on-gpu-devices">Run on GPU devices</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#i-o-management">I/O Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#ensemble">Ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#all-models">All Models</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Additional information</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="about.html">About us</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="about.html#core-development-team">Core Development Team</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#future-works">Future works</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#inclusion-criteria">Inclusion Criteria</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release.html">Release History</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release.html#version-0-1-and-earlier">Version 0.1 and earlier</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +197,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-right" title="pyEnGNet" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

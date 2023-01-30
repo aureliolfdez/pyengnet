@@ -1,1 +1,4 @@
-__version__ = '0.1.2'
+"""
+File to store the software version. 
+"""
+__version__ = '0.0.0'

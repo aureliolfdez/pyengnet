@@ -3,6 +3,21 @@ import math
 class Normalization:
     
     def normalizedArray(gen, genNormalized, size):
+        """
+        Function used by the NMI measure to normalise the values of a gene stored in a dataset.
+        
+        Parameters
+        ----------
+        gen: array
+            Array representing the non-normalised values for a gene.
+
+        genNormalized: array
+            Array storing the normalised values
+
+        size: int
+            Number of values involved in normalisation.
+            
+        """
         maxValue = 0
         if (size > 0):
             minValue = int(math.floor(gen[0]))
