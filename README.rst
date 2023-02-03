@@ -3,7 +3,7 @@ pyEnGNet: optimized reconstruction of gene co-expression networks using multi-GP
 
 **Deployment & Documentation & Stats**
 
-.. image:: https://img.shields.io/badge/pypi-v0.0.1-brightgreen
+.. image:: https://img.shields.io/badge/pypi-v0.0.3-brightgreen
    :target: https://pypi.org/project/pyengnet/
    :alt: PyPI version
 
