@@ -239,8 +239,7 @@ class Engnet:
         if(numGpus == None or numGpus < 1):
             graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
         else:
-            graphComplete, infoGraphComplete = Engnet.__CPUmethod(dataset, saveComplete)
-            #graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
+            graphComplete, infoGraphComplete = Engnet.__GPUmethod(dataset, saveComplete, numGpus, computeCapability)
         
         # Second step: Pruning
         graphFiltered = nx.minimum_spanning_tree(graphComplete) # Kruskal        

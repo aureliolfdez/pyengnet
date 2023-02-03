@@ -12,7 +12,7 @@ def readme():
 # Setting up
 setup(
     name="pyengnet",
-    version='0.0.2',
+    version='0.0.3',
     author="Aurelio Lopez-Fernandez",
     author_email="alopfer1@upo.es",
     description='pyEnGNet: optimized reconstruction of gene co-expression networks using multi-GPU',    
@@ -28,5 +28,5 @@ setup(
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering'
     ],    
-    python_requires='>=3.10'
+    python_requires='>=3.9'
 )
