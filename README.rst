@@ -31,8 +31,7 @@ pyEnGNet: optimized reconstruction of gene co-expression networks using multi-GP
 ----
 
 
-Abstract here
-
+Gene co-expression networks are valuable tools for discovering biologically relevant information within gene expression data. However, analysing large datasets presents challenges due to the identification of nonlinear gene–gene associations and the need to process an ever-growing number of gene pairs and their potential network connections. These challenges mean that some experiments are discarded because the techniques do not support these intense workloads. This paper presents pyEnGNet, a Python library that can generate gene co-expression networks in High-performance computing environments. To do this, pyEnGNet harnesses CPU and multi-GPU parallel computing resources, efficiently handling large datasets. These implementations have optimised memory management and processing, delivering timely results. We have used synthetic datasets to prove the runtime and intensive workload improvements. In addition, pyEnGNet was used in a real-life study of patients after allogeneic stem cell transplantation with invasive aspergillosis and was able to detect biological perspectives in the study.
 
 **pyengnet** is featured for:
 
@@ -72,15 +71,11 @@ Abstract here
 
 **Citing pyEnGNet**\ :
 
-`pyEnGNet paper <#>`_ is published in
-`(under review) <#>`_.
+`pyEnGNet paper <https://link.springer.com/article/10.1007/s11227-024-06127-4>`_ is published in
+`The Journal of Supercomputing <https://link.springer.com/article/10.1007/s11227-024-06127-4>`_.
 If you use pyEnGNet in a scientific publication, we would appreciate citations to the following paper::
 
-   Under review
-
-or::
-
-    Under review
+   López-Fernández, A., Gómez-Vela, F. A., del Saz-Navarro, M., Delgado-Chaves, F. M., & Rodríguez-Baena, D. S. (2024). Optimized Python library for reconstruction of ensemble-based gene co-expression networks using multi-GPU. The Journal of Supercomputing, 1-35.
 
 
 **Key Links and Resources**\ :
